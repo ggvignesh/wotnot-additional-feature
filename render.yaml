@@ -1,43 +1,16 @@
 services:
-  # Backend Service (Python FastAPI)
+  # Single Web Service (Python + Frontend)
   - type: web
-    name: wotnot-backend
+    name: wotnot-app
     env: python
     plan: free
     buildCommand: |
       pip install -r backend/requirements.txt
+      cd frontend/app && npm install && npm run build
     startCommand: |
-      cd backend && uvicorn wati.main:app --host 0.0.0.0 --port $PORT
+      cd backend && python server.js
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: wotnot-db
-          property: connectionString
-    healthCheckPath: /docs
-
-  # Frontend Service (Vue.js)
-  - type: web
-    name: wotnot-frontend
-    env: static
-    plan: free
-    buildCommand: |
-      cd frontend/app && npm install && npm run build
-    staticPublishPath: frontend/app/dist
-    envVars:
       - key: NODE_VERSION
         value: 18.18.0
-
-  # Database Service
-  - type: pserv
-    name: wotnot-db
-    plan: free
-    env: postgresql
-    envVars:
-      - key: POSTGRES_DB
-        value: wotnot
-      - key: POSTGRES_USER
-        value: wotnot_user
-      - key: POSTGRES_PASSWORD
-        generateValue: true

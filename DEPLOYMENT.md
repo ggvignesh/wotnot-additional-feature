@@ -1,58 +1,31 @@
-# Deployment Guide for Render
+# Easy Render Deployment Guide
 
-## Backend Deployment
+## 🚀 One-Click Deployment
 
-### Environment Variables to set in Render:
-- `DATABASE_URL` - Will be automatically provided by Render PostgreSQL service
-- `SECRET_KEY` - Generate a secure random string
-- `ALGORITHM` - Set to "HS256"
-- `ACCESS_TOKEN_EXPIRE_MINUTES` - Set to "30"
+1. **Go to [Render.com](https://render.com)**
+2. **Click "New +" → "Web Service"**
+3. **Connect your GitHub repository**: `https://github.com/ggvignesh/wotnot-additional-feature.git`
+4. **Use these settings:**
+   - **Name**: `wotnot-app`
+   - **Environment**: `Python 3`
+   - **Build Command**: `pip install -r backend/requirements.txt && cd frontend/app && npm install && npm run build`
+   - **Start Command**: `cd backend && node server.js`
+   - **Plan**: `Free`
 
-### Build Command:
-```bash
-pip install -r backend/requirements.txt
-```
+5. **Click "Create Web Service"**
 
-### Start Command:
-```bash
-cd backend/wati && uvicorn main:app --host 0.0.0.0 --port $PORT
-```
+## ✅ That's it! 
 
-## Frontend Deployment
+Your app will automatically:
+- Install Python dependencies
+- Install Node.js dependencies  
+- Build the Vue.js frontend
+- Start the Express server
+- Serve both frontend and backend from one URL
 
-### Environment Variables to set in Render:
-- `VUE_APP_API_URL` - Set to your backend service URL (e.g., https://wotnot-backend.onrender.com)
-- `VUE_APP_WS_URL` - Set to your backend WebSocket URL (e.g., wss://wotnot-backend.onrender.com/ws)
+## 🔗 Your app will be available at:
+`https://wotnot-app.onrender.com`
 
-### Build Command:
-```bash
-cd frontend/app && npm install && npm run build
-```
-
-### Publish Directory:
-```
-frontend/app/dist
-```
-
-## Database Setup
-
-The PostgreSQL database will be automatically created by Render. Make sure to:
-1. Create a PostgreSQL service in Render
-2. Connect it to your backend service
-3. The DATABASE_URL will be automatically provided
-
-## Services to Deploy:
-
-1. **Backend Service** (Python/Web)
-   - Source: GitHub repository
-   - Build Command: `pip install -r backend/requirements.txt`
-   - Start Command: `cd backend/wati && uvicorn main:app --host 0.0.0.0 --port $PORT`
-
-2. **Frontend Service** (Static Site)
-   - Source: GitHub repository
-   - Build Command: `cd frontend/app && npm install && npm run build`
-   - Publish Directory: `frontend/app/dist`
-
-3. **Database Service** (PostgreSQL)
-   - Plan: Free tier
-   - Database name: wotnot
+## 📝 Optional Environment Variables:
+- `SECRET_KEY` - Add a random string for security
+- `DATABASE_URL` - If you need a database later

@@ -22,12 +22,12 @@ app.get("/api/hello", (req, res) => {
 });
 
 // =======================
-// Serve React frontend
+// Serve Vue.js frontend
 // =======================
-const frontendPath = path.join(__dirname, "../frontend/app/build");
+const frontendPath = path.join(__dirname, "../frontend/app/dist");
 app.use(express.static(frontendPath));
 
-// For any unknown route, send back React index.html
+// For any unknown route, send back Vue index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
