@@ -1,16 +1,14 @@
 services:
-  # Single Web Service (Python + Frontend)
+  # Single Web Service (Node.js + Frontend)
   - type: web
     name: wotnot-app
-    env: python
+    env: node
     plan: free
     buildCommand: |
-      pip install -r backend/requirements.txt
-      cd frontend/app && npm install && npm run build
+      cd backend && npm install
+      cd ../frontend/app && npm install && npm run build
     startCommand: |
-      cd backend && python server.js
+      cd backend && node server.js
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: NODE_VERSION
         value: 18.18.0

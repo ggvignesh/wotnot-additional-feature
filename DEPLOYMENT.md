@@ -7,8 +7,9 @@
 3. **Connect your GitHub repository**: `https://github.com/ggvignesh/wotnot-additional-feature.git`
 4. **Use these settings:**
    - **Name**: `wotnot-app`
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r backend/requirements.txt && cd frontend/app && npm install && npm run build`
+   - **Environment**: `Node`
+   - **Branch**: `main`
+   - **Build Command**: `cd backend && npm install && cd ../frontend/app && npm install && npm run build`
    - **Start Command**: `cd backend && node server.js`
    - **Plan**: `Free`
 
@@ -26,6 +27,13 @@ Your app will automatically:
 ## 🔗 Your app will be available at:
 `https://wotnot-app.onrender.com`
 
-## 📝 Optional Environment Variables:
-- `SECRET_KEY` - Add a random string for security
-- `DATABASE_URL` - If you need a database later
+## 📝 Environment Variables to Add:
+- `OPENAI_API_KEY` - Your OpenAI API key (required for AI features)
+- `SECRET_KEY` - Add a random string for security (optional)
+- `DATABASE_URL` - If you need a database later (optional)
+
+### How to add environment variables in Render:
+1. Go to your service dashboard
+2. Click "Environment" tab
+3. Add each variable with its value
+4. Click "Save Changes"
